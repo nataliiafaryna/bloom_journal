@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;700&family=Ysabeau+Infant:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="site">
+  <div class="register-form">
+    <h1>Create an account</h1>
+    <p class="lead">Register to gain access to all features!</p>
+
+    <form id="registerForm">
+      <label>Name
+        <input type="text" id="regName" placeholder="Your name" required>
+      </label>
+      <label>E-mail
+        <input type="email" id="regEmail" placeholder="example@email.com" required>
+      </label>
+      <label>Password
+        <input type="password" id="regPassword" placeholder="Password" required>
+      </label>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" required> I agree to the terms of service.</label>
+        <label><input type="checkbox"> Subscribe to news and updates.</label>
+      </div>
+
+      <button type="submit" class="start-btn">Sign up</button>
+    </form>
+
+    <p class="muted" style="margin-top:20px;">Already have an account? <a href="log_in.html">Log in</a></p>
+  </div>
+</div>
+
+<script>
+const registerForm = document.getElementById("registerForm");
+
+registerForm.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("regName").value;
+  const email = document.getElementById("regEmail").value;
+  const password = document.getElementById("regPassword").value;
+
+  // Зберігаємо користувача в localStorage
+  const user = { name, email, password };
+  localStorage.setItem("user", JSON.stringify(user));
+
+  alert("Registration successful!");
+  window.location.href = "garden.html"; // перенаправлення
+});
+</script>
+</body>
+</html>
