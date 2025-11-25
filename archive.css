@@ -1,0 +1,197 @@
+body {
+    margin: 0;
+    background: #f7f4ef;
+    font-family: serif;
+    color: #2a2a2a;
+}
+
+.wrapper {
+    width: 90%;
+    margin: auto;
+    padding-top: 40px;
+}
+
+/* Header */
+.month-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.arrow-btn {
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.arrow-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.month-title {
+    text-align: center;
+    cursor: pointer;
+}
+
+.month-title h2 {
+    background: #d9a9a9;
+    padding: 10px 25px;
+    border-radius: 40px;
+    font-style: italic;
+    font-size: 28px;
+}
+
+.month-title h2:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.month-title p {
+    margin-top: 6px;
+    font-size: 18px;
+}
+
+/* GARDEN BOX */
+.garden-box {
+    background: #9daca0;
+    width: 80%;
+    margin: auto;
+    padding: 25px;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    height: 430px;
+}
+
+/* Поява */
+.flower {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    opacity: 0;
+    animation: flowerAppear 0.9s ease-out forwards;
+    animation-delay: var(--delay);
+}
+
+/* Анімація вітру як ДОДАТКОВА, а не заміна */
+.wind {
+    animation-name: flowerAppear, windFloat;
+    animation-duration: 0.9s, 4s;
+    animation-delay: var(--delay), calc(var(--delay) + 1s);
+    animation-fill-mode: forwards, both;
+    animation-iteration-count: 1, infinite;
+}
+
+/* Поява */
+@keyframes flowerAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(30px);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Вітер */
+@keyframes windFloat {
+    0%   { transform: rotate(-1deg) translateX(0px); }
+    25%  { transform: rotate(1deg) translateX(2px); }
+    50%  { transform: rotate(-1deg) translateX(-2px); }
+    75%  { transform: rotate(1.5deg) translateX(1px); }
+    100% { transform: rotate(-1deg) translateX(0px); }
+}
+
+/* Empty state */
+.empty-garden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #5a6d5f;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Modal */
+.modal.hidden { 
+    display: none; 
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.month-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.month-item {
+    padding: 10px;
+    border-radius: 10px;
+    background: #f2e2e2;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.month-item:hover {
+    background: #e3c1c1;
+}
+
+.month-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #e8e8e8;
+}
+
+.month-item.disabled:hover {
+    background: #e8e8e8;
+}
+
+.close-btn {
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: #d9a9a9;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    background: #c99999;
+    transform: scale(1.05);
+}
