@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: "Ysabeau Infant", serif;
+  background-color: #F7F4ED;
+  color: black;
+}
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 60px 80px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column; /* дозволяє рівно ставити елементи один під одним */
+  align-items: flex-start; /* вирівнювання кнопки по лівій лінії тексту */
+  max-width: 600px;
+}
+
+
+.text h1 {
+  font-family: "Vollkorn SC", serif;
+  font-size: 3rem;
+  margin: 0;
+}
+
+.text p {
+  font-family: "Ysabeau Infant", serif;
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+.sunflower {
+  height: 220px;                 /* трохи більша — виглядає ефектніше */
+  object-fit: cover;
+}
+
+.start-btn {
+  display: inline-block;        /* щоб <a> виглядало як кнопка */
+  text-decoration: none;        /* без підкреслення */
+  background-color: #DBA0A2;
+  margin-top: 20px;
+  padding: 15px 75px;
+  border: none;
+  border-radius: 60px;
+  font-family: "Vollkorn SC", serif;
+  font-size: 33px;
+  color: #F7F4ED;
+  cursor: pointer;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  transition: 0.2s ease;
+}
+
+.start-btn:hover {
+  background-color: #c88b8d;
+  transform: translateY(-3px);
+}
+.about1 {
+  display: flex;         /* ставимо елементи в один ряд */
+  align-items: center;   /* вирівнюємо по вертикалі */
+  gap: 15px;             /* відстань між картинкою і текстом */
+}
+
+.about1 img {
+  width: 45px;           /* або будь-який інший розмір */
+  height: 45px;
+  object-fit: cover;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;/* текст один під одним */
+}
+
+.text_1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.text_2 {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
