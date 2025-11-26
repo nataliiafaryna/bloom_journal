@@ -1,0 +1,239 @@
+/* FONTS */
+body {
+    font-family: "Ysabeau Infant", sans-serif;
+    background: #f7f4ee;
+    margin: 0;
+    padding: 0;
+    color: #212121;
+}
+
+h1, h2, h3 {
+    font-family: "Vollkorn SC", serif;
+}
+
+/* TOP BAR */
+.top-bar {
+    height: 40px;
+    background: #b8beab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.theme-toggle {
+    width: 50px;
+    height: 20px;
+    border-radius: 30px;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+}
+
+.theme-toggle::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: #ec8c7c;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: .3s;
+}
+
+body.dark .theme-toggle {
+    background: #555;
+}
+
+body.dark .theme-toggle::after {
+    left: 32px;
+    background: #e1e1e1;
+}
+
+.top-right button {
+    font-size: 20px;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* LAYOUT */
+.layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* FILTER SIDEBAR */
+.filters {
+    background: #f3d8a8;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.emotion-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.emotion {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    background: #fff;
+    border: 2px solid transparent;
+}
+
+.emotion.active {
+    border-color: #8FA38B;
+    background: #ffe9c7;
+}
+
+/* GARDEN */
+.garden-container {
+    text-align: center;
+}
+
+.month-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.garden {
+    width: 100%;
+    height: 450px;
+    background: #8b9983;
+    border-radius: 25px;
+    position: relative;
+}
+
+.flower {
+    position: absolute;
+    width: 40px;
+    opacity: .9;
+}
+
+/* RIGHT STATS */
+.stat-box {
+    padding: 20px;
+    background: #f3d8a8;
+    border-radius: 15px;
+}
+
+/* ADD BUTTON */
+.add-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    background: #f2a7b3;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 400px;
+    background: #C2C6B8;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.modal-emotions .emotion {
+    background: #f7f7f7;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn, .cancel-btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #F0D8D6;
+    color: #8FA38B;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+.flower {
+    position: absolute;
+    width: 40px;
+}
+
+/* -------------------
+   VIEW MODAL
+------------------- */
+#viewModal {
+    display: none; /* ховаємо за замовчуванням */
+    position: fixed; /* фіксуємо на екрані */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* затемнений фон */
+    justify-content: center; /* по горизонталі центр */
+    align-items: center;     /* по вертикалі центр */
+    z-index: 1000;           /* поверх усього */
+    display: flex;            /* щоб працювало центрування */
+}
+
+#viewModal .modal-content {
+    background-color: #F0D8D6;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px; /* або відсоток, наприклад 50% */
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: relative;
+}
+#viewModal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}

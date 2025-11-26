@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Garden</title>
+    <link rel="stylesheet" href="garden.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;600&family=Ysabeau+Infant:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body class="light">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+        <div class="theme-toggle" id="themeToggle"></div>
+
+        <div class="top-right">
+            <button class="menu-btn">☰</button>
+            <button class="logout-btn" id="logoutBtn">⎋</button>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="layout">
+
+        <!-- FILTERS -->
+        <aside class="filters">
+            <h3>Emotions</h3>
+
+            <div class="emotion-list" id="filterEmotions"></div>
+
+            
+
+            <h4>Date</h4>
+            <input type="date" id="filterDate">
+        </aside>
+
+        <!-- GARDEN AREA -->
+        <section class="garden-container">
+            <div class="month-nav">
+                <button id="prevMonth">‹</button>
+                <h2 id="currentMonth">November 2025</h2>
+                <button id="nextMonth">›</button>
+            </div>
+
+            <div class="garden" id="garden"></div>
+
+            <p class="subtitle">Grow your own garden while keeping track of your emotions!</p>
+        </section>
+
+        <!-- RIGHT PANEL -->
+        <aside class="stats">
+            <div class="stat-box">
+                <p>Notes in <span id="statMonth">November</span>:</p>
+                <h2 id="statTotal">21</h2>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ADD BUTTON -->
+    <button class="add-btn" id="addBtn">+</button>
+
+    <!-- MODAL ADD RECORD -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+
+            <h2>What do you feel right now?</h2>
+
+            <label>Emotions (choose at least 1):</label>
+            <div class="emotion-list modal-emotions" id="modalEmotions"></div>
+
+            <label>Your note:</label>
+            <textarea id="noteText" maxlength="500" placeholder="Write something..."></textarea>
+
+            <div class="modal-actions">
+                <button id="cancelModal" class="cancel-btn">Cancel</button>
+                <button id="saveModal" class="save-btn">Save</button>
+            </div>
+        </div>
+    </div>
+<!-- Modal for viewing entry -->
+<!-- Modal for viewing entry -->
+<div id="viewModal" class="view-modal">
+  <div class="modal-content">
+    <span id="closeViewModal" class="close">&times;</span>
+    <h2>Entry Details</h2>
+    <p><strong>Date:</strong> <span id="viewDate"></span></p>
+    <p><strong>Emotions:</strong> <span id="viewEmotions"></span></p>
+    <p><strong>Text:</strong></p>
+    <p id="viewText"></p>
+  </div>
+</div>
+
+    <script src="garden.js"></script>
+</body>
+</html>
