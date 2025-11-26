@@ -37,22 +37,27 @@
 </div>
 
 <script>
-const registerForm = document.getElementById("registerForm");
-
-registerForm.addEventListener("submit", function(e){
+const form = document.querySelector('form');
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const name = form.querySelector('input[type="text"]').value;
+  const email = form.querySelector('input[type="email"]').value;
+  const password = form.querySelector('input[type="password"]').value;
 
-  const name = document.getElementById("regName").value;
-  const email = document.getElementById("regEmail").value;
-  const password = document.getElementById("regPassword").value;
+  const res = await fetch('/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password })
+  });
 
-  // Зберігаємо користувача в localStorage
-  const user = { name, email, password };
-  localStorage.setItem("user", JSON.stringify(user));
-
-  alert("Registration successful!");
-  window.location.href = "garden.html"; // перенаправлення
+  const data = await res.json();
+  if(data.success) {
+    window.location.href = "garden.html"; // після реєстрації
+  } else {
+    alert(data.error);
+  }
 });
 </script>
+
 </body>
 </html>

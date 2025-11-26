@@ -32,23 +32,31 @@
 </div>
 
 <script>
-const loginForm = document.getElementById("loginForm");
-
-loginForm.addEventListener("submit", function(e){
+const form = document.querySelector('form');
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const email = form.querySelector('input[type="email"]').value;
+  const password = form.querySelector('input[type="password"]').value;
 
-  const email = document.getElementById("logEmail").value;
-  const password = document.getElementById("logPassword").value;
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
 
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const data = await res.json();
+  if(data.success) {
+    // Зберігаємо userId у localStorage
+    localStorage.setItem('currentUserId', data.user.id);
 
-  if(storedUser && storedUser.email === email && storedUser.password === password){
-    alert("Login successful!");
-    window.location.href = "garden.html"; // перенаправлення
+    // Переходимо до сторінки саду
+    window.location.href = "garden.html";
   } else {
-    alert("Incorrect email or password.");
+    alert(data.error);
   }
 });
+
 </script>
+
 </body>
 </html>
