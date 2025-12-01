@@ -3,20 +3,63 @@
    EMOTIONS
 ------------------- */
 const emotionList = [
-    "happiness", "joy", "calmness", "acceptance", "love",
-    "trust", "surprise", "admiration", "interest"
+    "happiness", "joy", "calmness", "peace", "love", "affection", "tenderness",
+    "hope", "gratitude", "inspiration", "admiration", "amusement", "excitement",
+    "pride", "interest", "satisfaction", "relief",
+
+    "sadness", "anger", "frustration", "anxiety", "fear", "guilt", "shame",
+    "disappointment", "loneliness", "confusion",
+
+    "acceptance", "nostalgia", "surprise", "curiosity", "vulnerability",
+    "determination", "empowerment", "longing", "overwhelm", "emptiness",
+    "uncertainty", "anticipation", "trust", "compassion"
 ];
+
 
 const flowerImages = {
     happiness: "flowerimages/1.png",
     joy: "flowerimages/2.png",
     calmness: "flowerimages/3.png",
-    acceptance: "flowerimages/4.png",
+    peace: "flowerimages/4.png",
     love: "flowerimages/5.png",
-    trust: "flowerimages/6.png",
-    surprise: "flowerimages/7.png",
-    admiration: "flowerimages/8.png",
-    interest: "flowerimages/9.png"
+    affection: "flowerimages/6.png",
+    tenderness: "flowerimages/7.png",
+    hope: "flowerimages/8.png",
+    gratitude: "flowerimages/9.png",
+    inspiration: "flowerimages/10.png",
+    admiration: "flowerimages/11.png",
+    amusement: "flowerimages/12.png",
+    excitement: "flowerimages/13.png",
+    pride: "flowerimages/14.png",
+    interest: "flowerimages/15.png",
+    satisfaction: "flowerimages/16.png",
+    relief: "flowerimages/17.png",
+
+    sadness: "flowerimages/18.png",
+    anger: "flowerimages/19.png",
+    frustration: "flowerimages/20.png",
+    anxiety: "flowerimages/21.png",
+    fear: "flowerimages/22.png",
+    guilt: "flowerimages/23.png",
+    shame: "flowerimages/24.png",
+    disappointment: "flowerimages/25.png",
+    loneliness: "flowerimages/26.png",
+    confusion: "flowerimages/27.png",
+
+    acceptance: "flowerimages/28.png",
+    nostalgia: "flowerimages/29.png",
+    surprise: "flowerimages/30.png",
+    curiosity: "flowerimages/31.png",
+    vulnerability: "flowerimages/32.png",
+    determination: "flowerimages/33.png",
+    empowerment: "flowerimages/34.png",
+    longing: "flowerimages/35.png",
+    overwhelm: "flowerimages/36.png",
+    emptiness: "flowerimages/37.png",
+    uncertainty: "flowerimages/38.png",
+    anticipation: "flowerimages/39.png",
+    trust: "flowerimages/40.png",
+    compassion: "flowerimages/41.png"
 };
 
 /* -------------------
