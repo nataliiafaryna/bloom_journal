@@ -6,9 +6,72 @@
     <title>My Garden</title>
     <link rel="stylesheet" href="garden.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;600&family=Ysabeau+Infant:wght@300;400;500&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;600&family=Ysabeau+Infant:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Floating Support Button Styles */
+        .support-button {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(110deg, #3E482A 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+
+        .support-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-button img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .support-button .tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .support-button:hover .tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .support-button {
+                width: 50px;
+                height: 50px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+    </style>
 </head>
+
 
 <body class="light">
     <!-- TOP BAR -->
@@ -101,6 +164,14 @@
             <p id="viewText"></p>
         </div>
     </div>
+      <!-- Floating Support Button -->
+    <a href="https://www.rozmova.me/" 
+       target="_blank" 
+       class="support-button">
+        <img src="flowerimages/завантаження (1).png" alt="Rozmova Support">
+        
+    </a>
+
 
     <script src="garden.js"></script>
 </body>

@@ -33,33 +33,33 @@ const flowerImages = {
     pride: "flowerimages/14.png",
     interest: "flowerimages/15.png",
     satisfaction: "flowerimages/16.png",
-    relief: "flowerimages/17.png",
+    relief: "flowerimages/1.png",
 
-    sadness: "flowerimages/18.png",
-    anger: "flowerimages/19.png",
-    frustration: "flowerimages/20.png",
-    anxiety: "flowerimages/21.png",
-    fear: "flowerimages/22.png",
-    guilt: "flowerimages/23.png",
-    shame: "flowerimages/24.png",
-    disappointment: "flowerimages/25.png",
-    loneliness: "flowerimages/26.png",
-    confusion: "flowerimages/27.png",
+    sadness: "flowerimages/2.png",
+    anger: "flowerimages/3.png",
+    frustration: "flowerimages/4.png",
+    anxiety: "flowerimages/5.png",
+    fear: "flowerimages/6.png",
+    guilt: "flowerimages/7.png",
+    shame: "flowerimages/8.png",
+    disappointment: "flowerimages/9.png",
+    loneliness: "flowerimages/10.png",
+    confusion: "flowerimages/11.png",
 
-    acceptance: "flowerimages/28.png",
-    nostalgia: "flowerimages/29.png",
-    surprise: "flowerimages/30.png",
-    curiosity: "flowerimages/31.png",
-    vulnerability: "flowerimages/32.png",
-    determination: "flowerimages/33.png",
-    empowerment: "flowerimages/34.png",
-    longing: "flowerimages/35.png",
+    acceptance: "flowerimages/12.png",
+    nostalgia: "flowerimages/13.png",
+    surprise: "flowerimages/14.png",
+    curiosity: "flowerimages/15.png",
+    vulnerability: "flowerimages/16.png",
+    determination: "flowerimages/1.png",
+    empowerment: "flowerimages/2.png",
+    longing: "flowerimages/3.png",
     overwhelm: "flowerimages/36.png",
-    emptiness: "flowerimages/37.png",
-    uncertainty: "flowerimages/38.png",
-    anticipation: "flowerimages/39.png",
-    trust: "flowerimages/40.png",
-    compassion: "flowerimages/41.png"
+    emptiness: "flowerimages/4.png",
+    uncertainty: "flowerimages/5.png",
+    anticipation: "flowerimages/6.png",
+    trust: "flowerimages/7.png",
+    compassion: "flowerimages/8.png"
 };
 
 /* -------------------
@@ -819,7 +819,7 @@ function logout() {
     localStorage.removeItem("theme");
     localStorage.removeItem("gardenEntries");
     alert("You have been logged out");
-    window.location.href = "login_html";
+    window.location.href = "log_in.html";
 }
 
 /* -------------------
