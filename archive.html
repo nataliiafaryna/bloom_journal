@@ -4,41 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garden Archive</title>
+    <link rel="stylesheet" href="garden.css">
     <link rel="stylesheet" href="archive.css">
-</head>
-<body>
-
-<div class="wrapper">
-
-    <!-- Header with month name -->
-    <div class="month-header">
-        <button id="prevMonth" class="arrow-btn">&#10094;</button>
-
-        <div class="month-title">
-            <h2 id="monthName"></h2>
-            <p id="dateRange"></p>
-        </div>
-
-        <button id="nextMonth" class="arrow-btn">&#10095;</button>
-    </div>
-
-    <!-- Flower grid -->
-    <div class="garden-box">
-        <div id="flowerGrid" class="flowers"></div>
-    </div>
-
    
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;600&family=Ysabeau+Infant:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
 
-    <div id="modal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Select Month</h3>
-            <div id="monthList" class="month-list"></div>
-            <button id="closePicker" class="close-btn">Close</button>
+<body class="light">
+    <!-- TOP BAR -->
+    <header class="top-bar">
+        <div class="theme-toggle-container">
+            <div class="theme-toggle" id="themeToggle"></div>
+            <span class="theme-label" id="themeLabel">Light</span>
+        </div>
+        
+        <div class="menu-toggle-container">
+            <button id="menu-toggle" class="menu-button">☰ Menu</button>
+        </div>
+    </header>
+
+    <!-- MENU PANEL -->
+    <div id="menu-panel" class="menu-panel">
+        <div class="menu-content">
+            <h2>Hello!</h2>
+            <button class="menu-item" id="menuGarden">Back to garden</button>
+            <button class="menu-item" id="menuArchive">Archive</button>
+            <button class="menu-item" id="menuCalendar">Calendar</button>
+            <button class="menu-item" id="menuStats">Statistics</button>
+            <button class="menu-item logout" id="menuLogout">Log out</button>
         </div>
     </div>
 
-</div>
+    <!-- BACKDROP -->
+    <div id="menu-backdrop" class="menu-backdrop"></div>
 
-<script src="archive.js"></script>
+    <!-- MAIN CONTENT -->
+    <div class="archive-container">
+        <!-- HEADER -->
+        <div class="archive-header">
+            <h1>Garden Archive</h1>
+            <p>Browse your emotional flowers by month</p>
+        </div>
+
+        <!-- MONTH NAVIGATION -->
+        <div class="month-navigation">
+            <button id="prevMonth" class="nav-btn">‹ Previous</button>
+            
+            <div class="current-month" id="monthPicker">
+                <h2 id="currentMonth">November 2025</h2>
+                <p>Click to select another month</p>
+            </div>
+            
+            <button id="nextMonth" class="nav-btn">Next ›</button>
+        </div>
+
+        <!-- GARDEN VIEW -->
+        <div class="archive-garden">
+            <div class="garden-area" id="gardenArea">
+                <!-- Flowers will appear here -->
+            </div>
+            
+            <!-- STATS -->
+            <div class="archive-stats">
+                <div class="stat-card">
+                    <h3>Month Statistics</h3>
+                    <div class="stat-item">
+                        <span>Total Entries:</span>
+                        <strong id="statEntries">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Flowers:</span>
+                        <strong id="statFlowers">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Unique Emotions:</span>
+                        <strong id="statEmotions">0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTH SELECTOR MODAL -->
+        <div id="monthModal" class="modal">
+            <div class="modal-content">
+                <h2>Select Month</h2>
+                <div class="month-grid" id="monthGrid">
+                    <!-- Months will be added here by JavaScript -->
+                </div>
+                <button id="closeModal" class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK TO GARDEN -->
+    <a href="garden.html" class="back-to-garden-btn">
+        ← Back to Main Garden
+    </a>
+
+    <script src="archive.js"></script>
 </body>
 </html>

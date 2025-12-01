@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/1.png",
+    "x": 150,
+    "y": 300
+  },
+  {
+    "id": 2,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/2.png",
+    "x": 250,
+    "y": 420
+  },
+
+
+  {
+    "id": 3,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/3.png",
+    "x": 150,
+    "y": 300
+  },
+
+  {
+    "id": 4,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/4.png",
+    "x": 150,
+    "y": 420
+  },
+
+  {
+    "id": 5,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/5.png",
+    "x": 150,
+    "y": 100
+  },
+  {
+    "id": 6,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/6.png",
+    "x": 300,
+    "y": 420
+  },
+
+  {
+    "id": 7,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/7.png",
+    "x": 150,
+    "y": 300
+  },
+  {
+    "id": 8,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/8.png",
+    "x": 250,
+    "y": 420
+  }, 
+  {
+    "id": 9,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/9.png",
+    "x": 150,
+    "y": 300
+  },
+  {
+    "id": 10,
+    "path": "C:/Users/38067/OneDrive/Робочий стіл/flowers/flowerimages/10.png",
+    "x": 250,
+    "y": 420
+  }
+
+]

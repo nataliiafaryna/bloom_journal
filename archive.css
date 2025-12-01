@@ -1,197 +1,345 @@
-body {
+/* ARCHIVE SPECIFIC STYLES */
+.archive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    padding-top: 90px;
+}
+
+/* HEADER */
+.archive-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.archive-header h1 {
+    font-family: "Vollkorn SC", serif;
+    font-size: 42px;
+    color: #8FA38B;
+    margin-bottom: 10px;
+}
+
+.archive-header p {
+    font-size: 18px;
+    color: #666;
     margin: 0;
-    background: #f7f4ef;
-    font-family: serif;
-    color: #2a2a2a;
 }
 
-.wrapper {
-    width: 90%;
-    margin: auto;
-    padding-top: 40px;
-}
-
-/* Header */
-.month-header {
+/* MONTH NAVIGATION */
+.month-navigation {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    background: #f3d8a8;
+    padding: 20px;
+    border-radius: 15px;
 }
 
-.arrow-btn {
-    font-size: 32px;
-    background: none;
+.nav-btn {
+    background: #EBD8D2;
     border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    padding: 5px;
+    transition: all 0.2s;
+    min-width: 120px;
 }
 
-.arrow-btn:disabled {
+.nav-btn:hover:not(:disabled) {
+    background: #e0c8c0;
+    transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.month-title {
+.current-month {
     text-align: center;
     cursor: pointer;
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: background 0.2s;
 }
 
-.month-title h2 {
-    background: #d9a9a9;
-    padding: 10px 25px;
-    border-radius: 40px;
-    font-style: italic;
+.current-month:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.current-month h2 {
+    margin: 0 0 5px 0;
     font-size: 28px;
+    color: #333;
 }
 
-.month-title h2:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
+.current-month p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
 }
 
-.month-title p {
-    margin-top: 6px;
-    font-size: 18px;
+/* GARDEN AREA */
+.archive-garden {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-/* GARDEN BOX */
-.garden-box {
-    background: #9daca0;
-    width: 80%;
-    margin: auto;
-    padding: 25px;
+@media (max-width: 900px) {
+    .archive-garden {
+        grid-template-columns: 1fr;
+    }
+}
+
+.garden-area {
+    background: #8b9983;
     border-radius: 25px;
+    padding: 30px;
+    min-height: 500px;
     position: relative;
     overflow: hidden;
-    height: 430px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Поява */
-.flower {
+body.dark .garden-area {
+    background: #556652;
+}
+
+/* FLOWERS IN ARCHIVE */
+.archive-flower {
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    opacity: 0;
-    animation: flowerAppear 0.9s ease-out forwards;
-    animation-delay: var(--delay);
-}
-
-/* Анімація вітру як ДОДАТКОВА, а не заміна */
-.wind {
-    animation-name: flowerAppear, windFloat;
-    animation-duration: 0.9s, 4s;
-    animation-delay: var(--delay), calc(var(--delay) + 1s);
-    animation-fill-mode: forwards, both;
-    animation-iteration-count: 1, infinite;
-}
-
-/* Поява */
-@keyframes flowerAppear {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) translateY(30px);
-    }
-    80% {
-        opacity: 1;
-        transform: scale(1.05) translateY(0);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Вітер */
-@keyframes windFloat {
-    0%   { transform: rotate(-1deg) translateX(0px); }
-    25%  { transform: rotate(1deg) translateX(2px); }
-    50%  { transform: rotate(-1deg) translateX(-2px); }
-    75%  { transform: rotate(1.5deg) translateX(1px); }
-    100% { transform: rotate(-1deg) translateX(0px); }
-}
-
-/* Empty state */
-.empty-garden {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: #5a6d5f;
-    font-size: 20px;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Modal */
-.modal.hidden { 
-    display: none; 
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 35px;
-    border-radius: 15px;
-    width: 350px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.month-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 15px 0;
-}
-
-.month-item {
-    padding: 10px;
-    border-radius: 10px;
-    background: #f2e2e2;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    animation: sway 4s ease-in-out infinite;
     cursor: pointer;
-    transition: 0.2s;
+    transition: transform 0.3s;
 }
 
-.month-item:hover {
-    background: #e3c1c1;
+.archive-flower:hover {
+    transform: scale(1.15);
+    z-index: 10;
 }
 
-.month-item.disabled {
+/* EMPTY STATE */
+.empty-archive {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 400px;
+}
+
+.empty-archive h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.empty-archive p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* STATS */
+.archive-stats {
+    height: fit-content;
+}
+
+.stat-card {
+    background: #f3d8a8;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+body.dark .stat-card {
+    background: #3a3a3a;
+}
+
+.stat-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: "Vollkorn SC", serif;
+    font-size: 22px;
+    color: #333;
+    text-align: center;
+}
+
+body.dark .stat-card h3 {
+    color: #e1e1e1;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-item span {
+    font-size: 16px;
+    color: #555;
+}
+
+body.dark .stat-item span {
+    color: #aaa;
+}
+
+.stat-item strong {
+    font-size: 20px;
+    color: #8FA38B;
+}
+
+/* MONTH GRID MODAL */
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+@media (max-width: 600px) {
+    .month-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.month-option {
+    padding: 15px 10px;
+    background: #F3D4D5;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+}
+
+.month-option:hover {
+    background: #e8c9cb;
+    transform: translateY(-3px);
+}
+
+.month-option.active {
+    background: #E3B8B8;
+    border-color: #d8a8a8;
+}
+
+.month-option.has-data {
+    background: #d9e8d4;
+    border-color: #8FA38B;
+}
+
+.month-option.has-data:hover {
+    background: #c8d8c3;
+}
+
+.month-option.future {
     opacity: 0.5;
     cursor: not-allowed;
     background: #e8e8e8;
 }
 
-.month-item.disabled:hover {
+.month-option.future:hover {
+    transform: none;
     background: #e8e8e8;
 }
 
-.close-btn {
-    padding: 10px 25px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    background: #d9a9a9;
+/* BACK TO GARDEN BUTTON */
+.back-to-garden-btn {
+    display: block;
+    width: fit-content;
+    margin: 40px auto;
+    padding: 15px 30px;
+    background: #f2a7b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: "Ysabeau Infant", sans-serif;
     font-size: 16px;
-    transition: 0.2s;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(242, 167, 179, 0.3);
 }
 
-.close-btn:hover {
-    background: #c99999;
-    transform: scale(1.05);
+.back-to-garden-btn:hover {
+    background: #f18b9b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(242, 167, 179, 0.4);
+}
+
+/* LOADING STATE */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* WIND ANIMATION (same as garden) */
+@keyframes sway {
+    0%, 100% { 
+        transform: rotate(-2deg) translateY(0px); 
+    }
+    25% { 
+        transform: rotate(1.5deg) translateY(-2px); 
+    }
+    50% { 
+        transform: rotate(-1deg) translateY(1px); 
+    }
+    75% { 
+        transform: rotate(0.5deg) translateY(-1px); 
+    }
+}
+
+/* FLOWER TOOLTIP */
+.archive-flower::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: pre-line;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    min-width: 150px;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+}
+
+.archive-flower:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
 }

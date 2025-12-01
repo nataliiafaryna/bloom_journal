@@ -5,34 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Garden</title>
     <link rel="stylesheet" href="garden.css">
-
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC:wght@400;600&family=Ysabeau+Infant:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body class="light">
-
     <!-- TOP BAR -->
     <header class="top-bar">
-        <div class="theme-toggle" id="themeToggle"></div>
-
-        <div class="top-right">
-            <button class="menu-btn">☰</button>
-            <button class="logout-btn" id="logoutBtn">⎋</button>
+        <div class="theme-toggle-container">
+            <div class="theme-toggle" id="themeToggle"></div>
+            <span class="theme-label" id="themeLabel">Light</span>
+        </div>
+        
+        <div class="menu-toggle-container">
+            <button id="menu-toggle" class="menu-button">☰ Menu</button>
         </div>
     </header>
 
+    <!-- MENU PANEL -->
+    <div id="menu-panel" class="menu-panel">
+        <div class="menu-content">
+            <h2>Hello!</h2>
+            <button class="menu-item" id="menuGarden">Back to garden</button>
+            <button class="menu-item" id="menuArchive">Archive</button>
+            <button class="menu-item" id="menuCalendar">Calendar</button>
+            <button class="menu-item" id="menuStats">Statistics</button>
+            <button class="menu-item logout" id="menuLogout">Log out</button>
+        </div>
+    </div>
+
+    <!-- BACKDROP -->
+    <div id="menu-backdrop" class="menu-backdrop"></div>
+
     <!-- MAIN LAYOUT -->
     <div class="layout">
-
         <!-- FILTERS -->
         <aside class="filters">
             <h3>Emotions</h3>
-
             <div class="emotion-list" id="filterEmotions"></div>
-
             
-
             <h4>Date</h4>
             <input type="date" id="filterDate">
         </aside>
@@ -50,11 +62,11 @@
             <p class="subtitle">Grow your own garden while keeping track of your emotions!</p>
         </section>
 
-        <!-- RIGHT PANEL -->
+        <!-- STATS -->
         <aside class="stats">
             <div class="stat-box">
                 <p>Notes in <span id="statMonth">November</span>:</p>
-                <h2 id="statTotal">21</h2>
+                <h2 id="statTotal">0</h2>
             </div>
         </aside>
     </div>
@@ -62,36 +74,32 @@
     <!-- ADD BUTTON -->
     <button class="add-btn" id="addBtn">+</button>
 
-    <!-- MODAL ADD RECORD -->
+    <!-- ADD MODAL -->
     <div class="modal" id="modal">
         <div class="modal-content">
-
             <h2>What do you feel right now?</h2>
-
             <label>Emotions (choose at least 1):</label>
             <div class="emotion-list modal-emotions" id="modalEmotions"></div>
-
             <label>Your note:</label>
             <textarea id="noteText" maxlength="500" placeholder="Write something..."></textarea>
-
             <div class="modal-actions">
                 <button id="cancelModal" class="cancel-btn">Cancel</button>
                 <button id="saveModal" class="save-btn">Save</button>
             </div>
         </div>
     </div>
-<!-- Modal for viewing entry -->
-<!-- Modal for viewing entry -->
-<div id="viewModal" class="view-modal">
-  <div class="modal-content">
-    <span id="closeViewModal" class="close">&times;</span>
-    <h2>Entry Details</h2>
-    <p><strong>Date:</strong> <span id="viewDate"></span></p>
-    <p><strong>Emotions:</strong> <span id="viewEmotions"></span></p>
-    <p><strong>Text:</strong></p>
-    <p id="viewText"></p>
-  </div>
-</div>
+
+    <!-- VIEW MODAL -->
+    <div id="viewModal" class="view-modal">
+        <div class="modal-content">
+            <span id="closeViewModal" class="close">&times;</span>
+            <h2>Entry Details</h2>
+            <p><strong>Date:</strong> <span id="viewDate"></span></p>
+            <p><strong>Emotions:</strong> <span id="viewEmotions"></span></p>
+            <p><strong>Text:</strong></p>
+            <p id="viewText"></p>
+        </div>
+    </div>
 
     <script src="garden.js"></script>
 </body>

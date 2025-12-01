@@ -5,58 +5,230 @@ body {
     margin: 0;
     padding: 0;
     color: #212121;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: "Vollkorn SC", serif;
+    margin-top: 0;
+}
+
+/* DARK THEME */
+body.dark {
+    background: #2a2a2a;
+    color: #e1e1e1;
+}
+
+body.dark .filters,
+body.dark .stat-box {
+    background: #3a3a3a;
 }
 
 /* TOP BAR */
 .top-bar {
-    height: 40px;
+    height: 60px;
     background: #b8beab;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body.dark .top-bar {
+    background: #4a4a4a;
+}
+
+/* THEME TOGGLE */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-label {
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+body.dark .theme-label {
+    color: #e1e1e1;
 }
 
 .theme-toggle {
     width: 50px;
-    height: 20px;
+    height: 24px;
     border-radius: 30px;
     background: #fff;
     position: relative;
     cursor: pointer;
+    border: 2px solid #a8b09d;
 }
 
 .theme-toggle::after {
     content: "";
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     background: #ec8c7c;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: .3s;
+    top: 1px;
+    left: 3px;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.dark .theme-toggle {
     background: #555;
+    border-color: #666;
 }
 
 body.dark .theme-toggle::after {
-    left: 32px;
+    left: 27px;
     background: #e1e1e1;
 }
 
-.top-right button {
-    font-size: 20px;
-    margin-left: 10px;
-    background: none;
+/* MENU BUTTON */
+.menu-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.menu-button {
+    background: #EBD8D2;
     border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-button:hover {
+    background: #e0c8c0;
+    transform: translateY(-1px);
+}
+
+body.dark .menu-button {
+    background: #555;
+    color: #e1e1e1;
+}
+
+body.dark .menu-button:hover {
+    background: #666;
+}
+
+/* MENU PANEL */
+.menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background: #BFC7BC;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    padding: 80px 25px 25px;
+    box-shadow: -2px 0 15px rgba(0,0,0,0.15);
+    overflow-y: auto;
+}
+
+.menu-panel.active {
+    transform: translateX(0);
+}
+
+body.dark .menu-panel {
+    background: #3a3a3a;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.menu-content h2 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+body.dark .menu-content h2 {
+    color: #e1e1e1;
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.menu-item {
+    width: 100%;
+    padding: 16px 20px;
+    margin: 0;
+    border-radius: 10px;
+    border: none;
+    background: #F3D4D5;
+    cursor: pointer;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-align: left;
+    color: #333;
+}
+
+.menu-item:hover {
+    background: #e8c9cb;
+    transform: translateX(-5px);
+}
+
+body.dark .menu-item {
+    background: #555;
+    color: #e1e1e1;
+}
+
+body.dark .menu-item:hover {
+    background: #666;
+}
+
+.logout {
+    background: #E3B8B8;
+    margin-top: 30px;
+}
+
+.logout:hover {
+    background: #d8a8a8;
+}
+
+/* BACKDROP */
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+    backdrop-filter: blur(2px);
+}
+
+.menu-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* LAYOUT */
@@ -65,29 +237,64 @@ body.dark .theme-toggle::after {
     grid-template-columns: 260px 1fr 260px;
     gap: 40px;
     padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* FILTER SIDEBAR */
+/* FILTERS */
 .filters {
     background: #f3d8a8;
     padding: 20px;
     border-radius: 15px;
+    height: fit-content;
 }
 
+body.dark .filters {
+    background: #3a3a3a;
+}
+
+.filters h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.filters h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.filters input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+}
+
+/* EMOTION LIST */
 .emotion-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 20px;
 }
 
 .emotion {
-    padding: 5px 12px;
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: 14px;
     cursor: pointer;
     background: #fff;
     border: 2px solid transparent;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.emotion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .emotion.active {
@@ -95,7 +302,7 @@ body.dark .theme-toggle::after {
     background: #ffe9c7;
 }
 
-/* GARDEN */
+/* GARDEN CONTAINER */
 .garden-container {
     text-align: center;
 }
@@ -104,29 +311,183 @@ body.dark .theme-toggle::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 20px;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.month-nav h2 {
+    margin: 0;
+    font-size: 28px;
+    min-width: 200px;
+}
+
+.month-nav button {
+    background: #f3d8a8;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.month-nav button:hover {
+    background: #e8cd9a;
+    transform: scale(1.1);
 }
 
 .garden {
     width: 100%;
-    height: 450px;
+    height: 420px;
     background: #8b9983;
     border-radius: 25px;
     position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+body.dark .garden {
+    background: #556652;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-top: 20px;
+}
+
+body.dark .subtitle {
+    color: #aaa;
+}
+
+/* FLOWER ENTRY */
+.flower-entry {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flower-entry:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    z-index: 100; 
+    filter: brightness(1.2);
 }
 
 .flower {
-    position: absolute;
-    width: 40px;
-    opacity: .9;
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    animation: sway 4s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 0.3s);
 }
 
-/* RIGHT STATS */
+@keyframes sway {
+    0%, 100% { 
+        transform: rotate(-2deg) translateY(0px); 
+    }
+    25% { 
+        transform: rotate(1.5deg) translateY(-2px); 
+    }
+    50% { 
+        transform: rotate(-1deg) translateY(1px); 
+    }
+    75% { 
+        transform: rotate(0.5deg) translateY(-1px); 
+    }
+}
+
+/* FLOWER TOOLTIP - ВИПРАВЛЕНИЙ */
+.flower-entry::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: pre-line;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000; /* ЗМІНИТИ НА 1000 */
+    min-width: 180px;
+    max-width: 250px;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.flower-entry:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+
+
+/* EMPTY GARDEN MESSAGE */
+.empty-garden {
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.empty-garden p:first-child {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-garden p:last-child {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* STATS */
+.stats {
+    height: fit-content;
+}
+
 .stat-box {
-    padding: 20px;
+    padding: 25px;
     background: #f3d8a8;
     border-radius: 15px;
+    text-align: center;
+}
+
+body.dark .stat-box {
+    background: #3a3a3a;
+}
+
+.stat-box p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+body.dark .stat-box p {
+    color: #aaa;
+}
+
+.stat-box h2 {
+    margin: 0;
+    font-size: 48px;
+    color: #8FA38B;
 }
 
 /* ADD BUTTON */
@@ -134,31 +495,72 @@ body.dark .theme-toggle::after {
     position: fixed;
     bottom: 40px;
     right: 40px;
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     border: none;
     background: #f2a7b3;
     font-size: 40px;
     color: white;
     cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(242, 167, 179, 0.3);
+}
+
+.add-btn:hover {
+    transform: scale(1.1);
+    background: #f18b9b;
+    box-shadow: 0 6px 16px rgba(242, 167, 179, 0.4);
+}
+
+.add-btn:active {
+    transform: scale(1.05);
 }
 
 /* MODAL */
-.modal {
+.modal, .view-modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.35);
+    background: rgba(0,0,0,.5);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
+}
+
+.modal.active, .view-modal.active {
+    display: flex;
 }
 
 .modal-content {
-    width: 400px;
+    width: 450px;
+    max-width: 90%;
     background: #C2C6B8;
     border-radius: 15px;
-    padding: 25px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+body.dark .modal-content {
+    background: #3a3a3a;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.modal-emotions {
+    margin-bottom: 20px;
 }
 
 .modal-emotions .emotion {
@@ -169,21 +571,44 @@ textarea {
     width: 100%;
     height: 120px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #3a3a3a;
+    box-shadow: 0 0 0 2px rgba(143, 163, 139, 0.2);
 }
 
 .modal-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 15px;
 }
 
 .save-btn, .cancel-btn {
-    padding: 8px 16px;
+    padding: 12px 24px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.cancel-btn {
+    background: #e0e0e0;
+    color: #555;
+}
+
+.cancel-btn:hover {
+    background: #d0d0d0;
 }
 
 .save-btn {
@@ -191,49 +616,332 @@ textarea {
     color: #8FA38B;
 }
 
+.save-btn:hover {
+    background: #e8c9cb;
+}
+
+/* VIEW MODAL */
+.view-modal .modal-content {
+    background-color: #F0D8D6;
+    padding: 25px;
+    border-radius: 15px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+body.dark .view-modal .modal-content {
+    background-color: #4a4a4a;
+}
+
+.view-modal .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-modal .close:hover {
+    color: #333;
+}
+
+body.dark .view-modal .close:hover {
+    color: #fff;
+}
+
+.view-modal p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.view-modal strong {
+    color: #8FA38B;
+}
+
 /* RESPONSIVE */
+@media (max-width: 1200px) {
+    .layout {
+        grid-template-columns: 220px 1fr 220px;
+        gap: 30px;
+        padding: 30px;
+    }
+}
+
 @media (max-width: 1000px) {
     .layout {
         grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 30px;
+    }
+    
+    .filters, .stats {
+        order: 2;
+    }
+    
+    .garden-container {
+        order: 1;
+    }
+    
+    .garden {
+        height: 400px;
+    }
+    
+    .menu-panel {
+        width: 280px;
     }
 }
-.flower {
-    position: absolute;
-    width: 40px;
+
+@media (max-width: 768px) {
+    .layout {
+        padding: 20px;
+    }
+    
+    .top-bar {
+        padding: 0 15px;
+        height: 50px;
+    }
+    
+    .menu-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .theme-label {
+        display: none;
+    }
+    
+    .garden {
+        height: 350px;
+    }
+    
+    .month-nav {
+        gap: 15px;
+    }
+    
+    .month-nav h2 {
+        font-size: 22px;
+        min-width: 160px;
+    }
+    
+    .flower {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .add-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 36px;
+        bottom: 30px;
+        right: 30px;
+    }
 }
 
-/* -------------------
-   VIEW MODAL
-------------------- */
-#viewModal {
-    display: none; /* ховаємо за замовчуванням */
-    position: fixed; /* фіксуємо на екрані */
-    top: 0;
-    left: 0;
+@media (max-width: 480px) {
+    .layout {
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .garden {
+        height: 300px;
+    }
+    
+    .flower {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .add-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+/* ВИРІВНЮВАННЯ ФОРМ */
+
+/* Filters вирівнювання */
+.filters h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filters input[type="date"] {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5); /* затемнений фон */
-    justify-content: center; /* по горизонталі центр */
-    align-items: center;     /* по вертикалі центр */
-    z-index: 1000;           /* поверх усього */
-    display: flex;            /* щоб працювало центрування */
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
 }
 
-#viewModal .modal-content {
-    background-color: #F0D8D6;
-    padding: 20px;
-    border-radius: 12px;
-    width: 400px; /* або відсоток, наприклад 50% */
-    max-width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    position: relative;
+/* Modal textarea вирівнювання */
+.modal-content textarea {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-family: "Ysabeau Infant", sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: block;
 }
-#viewModal .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
+
+/* Labels вирівнювання */
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+}
+
+/* Emotion list в modal */
+.modal-emotions {
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+/* Stats вирівнювання */
+.stat-box {
+    padding: 25px;
+    background: #f3d8a8;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-box p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    width: 100%;
+}
+
+.stat-box h2 {
+    margin: 0;
+    font-size: 48px;
+    color: #8FA38B;
+    text-align: center;
+    width: 100%;
+}
+
+/* Month navigation вирівнювання */
+.month-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.month-nav h2 {
+    margin: 0;
+    font-size: 28px;
+    min-width: 200px;
+    text-align: center;
+}
+
+/* Для кращого вирівнювання на мобільних */
+@media (max-width: 768px) {
+    .filters input[type="date"] {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+    }
+    
+    .modal-content textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .stat-box {
+        padding: 20px 15px;
+    }
+    
+    .stat-box h2 {
+        font-size: 36px;
+    }
+    
+    .month-nav {
+        gap: 15px;
+    }
+    
+    .month-nav h2 {
+        min-width: 160px;
+        font-size: 22px;
+    }
+}
+
+/* Додаткові стилі для кращого вирівнювання */
+.layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 40px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.filters, .stats {
+    position: sticky;
+    top: 80px;
+}
+
+/* Заголовки */
+.filters h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+}
+
+/* Вирівнювання кнопок місяців */
+.month-nav button {
+    background: #f3d8a8;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 26px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
