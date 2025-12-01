@@ -945,3 +945,56 @@ body.dark .view-modal .close:hover {
     transition: all 0.2s;
     flex-shrink: 0;
 }
+
+
+.modal-emotions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    /* додаємо прокрутку, якщо емоцій багато */
+    max-height: 150px;   /* висота блоку */
+    overflow-y: auto;    /* вертикальна прокрутка */
+    padding-right: 5px;  /* щоб смуга прокрутки не насувалася на контент */
+}
+
+/* трохи поліпшуємо скрол для більш гладкого вигляду */
+.modal-emotions::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-emotions::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.modal-emotions::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.filters .emotion-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    /* Встановлюємо висоту та прокрутку */
+    max-height: 250px;   /* довший блок */
+    overflow-y: auto;    /* вертикальна прокрутка */
+    padding-right: 5px;  /* щоб смуга прокрутки не насувалася на контент */
+}
+
+/* Додаємо стиль для смуги прокрутки */
+.filters .emotion-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filters .emotion-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.filters .emotion-list::-webkit-scrollbar-track {
+    background: transparent;
+}
