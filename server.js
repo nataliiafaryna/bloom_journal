@@ -10,7 +10,7 @@ const port = 3000;
 // --- MIDDLEWARES ---
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname)); // HTML/CSS/JS/Images
+app.use(express.static(__dirname)); 
 
 // --- DATABASE ---
 const db = new sqlite3.Database("./users.db", (err) => {

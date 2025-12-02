@@ -44,17 +44,107 @@ const menuPanel = document.getElementById('menu-panel');
 const backdrop = document.getElementById('menu-backdrop');
 const menuGarden = document.getElementById('menuGarden');
 const menuArchive = document.getElementById('menuArchive');
+const menuStats = document.getElementById('menuStats');
 const menuLogout = document.getElementById('menuLogout');
 const themeToggle = document.getElementById('themeToggle');
 const themeLabel = document.getElementById('themeLabel');
 
 // INITIALIZE
 function init() {
+    console.log("Initializing archive...");
+    setupMenu(); // Setup menu FIRST
     loadEntries();
     setupEventListeners();
     updateMonthDisplay();
     renderMonthGrid();
     renderGarden();
+}
+
+// SETUP MENU - ВИПРАВЛЕНО!
+function setupMenu() {
+    console.log("Setting up menu...");
+    
+    // Menu toggle
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+        console.log("Menu toggle button found");
+    } else {
+        console.error("Menu toggle button not found!");
+    }
+    
+    // Backdrop click
+    if (backdrop) {
+        backdrop.addEventListener('click', closeMenu);
+    }
+    
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
+    
+    // Menu navigation
+    if (menuGarden) {
+        menuGarden.addEventListener('click', () => {
+            closeMenu();
+            window.location.href = 'garden.html';
+        });
+    }
+    
+    if (menuArchive) {
+        menuArchive.addEventListener('click', () => {
+            closeMenu();
+            window.location.href = 'archive.html';
+        });
+    }
+    
+    if (menuStats) {
+        menuStats.addEventListener('click', () => {
+            closeMenu();
+            window.location.href = 'stats.html';
+        });
+    }
+    
+    if (menuLogout) {
+        menuLogout.addEventListener('click', () => {
+            localStorage.removeItem('currentUserId');
+            localStorage.removeItem('theme');
+            localStorage.removeItem('gardenEntries');
+            alert('You have been logged out');
+            window.location.href = 'log_in.html';
+        });
+    }
+    
+    // Theme toggle
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+        if (themeLabel) themeLabel.textContent = 'Dark';
+    }
+    
+    console.log("Menu setup complete");
+}
+
+// MENU FUNCTIONS
+function toggleMenu() {
+    console.log("Toggle menu clicked");
+    menuPanel.classList.toggle('active');
+    backdrop.classList.toggle('active');
+}
+
+function closeMenu() {
+    menuPanel.classList.remove('active');
+    backdrop.classList.remove('active');
+}
+
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (themeLabel) themeLabel.textContent = isDark ? 'Dark' : 'Light';
 }
 
 // LOAD ENTRIES FROM LOCALSTORAGE
@@ -69,7 +159,7 @@ function loadEntries() {
     }
 }
 
-// SETUP EVENT LISTENERS
+// SETUP EVENT LISTENERS FOR ARCHIVE
 function setupEventListeners() {
     // Month navigation
     if (prevMonthBtn) prevMonthBtn.addEventListener('click', goToPrevMonth);
@@ -77,73 +167,19 @@ function setupEventListeners() {
     
     // Month picker
     if (monthPicker) monthPicker.addEventListener('click', () => {
-        monthModal.style.display = 'flex';
+        monthModal.classList.add('active');
     });
     
     if (closeModal) closeModal.addEventListener('click', () => {
-        monthModal.style.display = 'none';
+        monthModal.classList.remove('active');
     });
     
     // Close modal on backdrop click
-    window.addEventListener('click', (e) => {
+    monthModal.addEventListener('click', (e) => {
         if (e.target === monthModal) {
-            monthModal.style.display = 'none';
+            monthModal.classList.remove('active');
         }
     });
-    
-    // Menu (same as garden)
-    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
-    if (backdrop) backdrop.addEventListener('click', closeMenu);
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-    });
-    
-    if (menuGarden) menuGarden.addEventListener('click', () => {
-        closeMenu();
-        window.location.href = 'garden.html';
-    });
-    
-    if (menuArchive) menuArchive.addEventListener('click', () => {
-        closeMenu();
-        window.location.href = 'archive.html';
-    });
-    
-    if (menuLogout) menuLogout.addEventListener('click', logout);
-    
-    // Theme
-    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark');
-        if (themeLabel) themeLabel.textContent = 'Dark';
-    }
-}
-
-// MENU FUNCTIONS
-function toggleMenu() {
-    menuPanel.classList.toggle('active');
-    backdrop.classList.toggle('active');
-}
-
-function closeMenu() {
-    menuPanel.classList.remove('active');
-    backdrop.classList.remove('active');
-}
-
-function logout() {
-    localStorage.removeItem('currentUserId');
-    localStorage.removeItem('theme');
-    alert('You have been logged out');
-    window.location.href = 'login.html';
-}
-
-function toggleTheme() {
-    const isDark = document.body.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    if (themeLabel) themeLabel.textContent = isDark ? 'Dark' : 'Light';
 }
 
 // MONTH NAVIGATION
@@ -263,8 +299,11 @@ function renderGarden() {
     
     allFlowers.forEach((flower, index) => {
         // Calculate position (avoid overlap)
-        const x = 50 + (index % 5) * 80 + Math.random() * 30;
-        const y = 50 + Math.floor(index / 5) * 80 + Math.random() * 30;
+        const col = index % 6;
+        const row = Math.floor(index / 6);
+        
+        const x = 50 + col * 80 + Math.random() * 30;
+        const y = 50 + row * 80 + Math.random() * 30;
         
         // Make sure it stays in bounds
         const finalX = Math.min(x, containerWidth);
@@ -328,7 +367,7 @@ function showEmptyState(title, message) {
     emptyDiv.innerHTML = `
         <h3>${title}</h3>
         <p>${message}</p>
-        <a href="garden.html" class="nav-btn" style="display: inline-block; margin-top: 20px;">
+        <a href="garden.html" class="nav-btn" style="display: inline-block; margin-top: 20px; text-decoration: none;">
             Go to Garden
         </a>
     `;
@@ -405,7 +444,7 @@ function renderMonthGrid() {
                     currentYear = year;
                     updateMonthDisplay();
                     renderGarden();
-                    monthModal.style.display = 'none';
+                    monthModal.classList.remove('active');
                     
                     // Update active state
                     document.querySelectorAll('.month-option').forEach(el => {
@@ -426,6 +465,8 @@ document.addEventListener('DOMContentLoaded', init);
 // DEBUG FUNCTION
 window.debugArchive = function() {
     console.log('=== ARCHIVE DEBUG ===');
+    console.log('Menu toggle exists:', !!menuToggle);
+    console.log('Menu panel exists:', !!menuPanel);
     console.log('Current month:', currentMonth, currentYear);
     console.log('Total entries:', allEntries.length);
     

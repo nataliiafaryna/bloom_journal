@@ -29,6 +29,7 @@ let timeFilter = 'all';
 let emotionChart = null;
 let monthlyChart = null;
 
+let currentUserId = localStorage.getItem('currentUserId');
 // DOM ELEMENTS
 const totalEntriesEl = document.getElementById('totalEntries');
 const totalFlowersEl = document.getElementById('totalFlowers');
@@ -57,22 +58,38 @@ const themeToggle = document.getElementById('themeToggle');
 const themeLabel = document.getElementById('themeLabel');
 
 // INITIALIZE
+// INITIALIZE
 function init() {
-    loadEntries();
-    setupEventListeners();
-    renderAllStats();
     setupCharts();
+    setupEventListeners();
+    // loadEntries тепер асинхронно завантажує дані та викликає renderAllStats()
+    loadEntries(); 
 }
+// ...
 
 // LOAD ENTRIES
-function loadEntries() {
-    const saved = localStorage.getItem('gardenEntries');
-    if (saved) {
-        allEntries = JSON.parse(saved);
-        console.log(`Loaded ${allEntries.length} entries for statistics`);
-    } else {
-        allEntries = [];
-        console.log('No entries found for statistics');
+// LOAD ENTRIES
+async function loadEntries() {
+    if (!currentUserId) {
+        console.error("User not logged in. Redirecting.");
+        // Перенаправити на логін, якщо користувач не увійшов
+        window.location.href = 'log_in.html';
+        return; 
+    }
+    
+    try {
+        const res = await fetch(`/entries?userId=${currentUserId}`);
+        
+        if (!res.ok) {
+            throw new Error('Failed to fetch entries from server');
+        }
+        
+        allEntries = await res.json();
+        console.log(`Loaded ${allEntries.length} entries for statistics from API`);
+        // Тільки після успішного завантаження даних, рендеримо статистику
+        renderAllStats(); 
+    } catch (err) {
+        console.error("Error loading entries for stats:", err);
     }
 }
 
@@ -421,7 +438,150 @@ function renderAchievements(stats) {
         achievementsEl.appendChild(item);
     });
 }
+function createEmotionChart(entries) {
+    const emotionCounts = {};
+    entries.forEach(entry => {
+        entry.emotions.forEach(emotion => {
+            emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+        });
+    });
+    
+    const ctx = document.getElementById('emotionChart').getContext('2d');
+    
+    // Цвета для эмоций
+    const emotionColors = {
+        'Happy': '#FFD700',
+        'Sad': '#4169E1',
+        'Angry': '#DC143C',
+        'Anxious': '#8B4513',
+        'Excited': '#FF69B4',
+        'Peaceful': '#32CD32',
+        'Tired': '#A9A9A9',
+        'Loved': '#FF1493',
+        'Grateful': '#FF8C00',
+        'Hopeful': '#9370DB'
+    };
+    
+    const labels = Object.keys(emotionCounts);
+    const data = Object.values(emotionCounts);
+    const backgroundColors = labels.map(emotion => emotionColors[emotion] || '#CCCCCC');
+    
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: backgroundColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        }
+    });
+}
 
+// График месячной активности
+function createMonthlyChart(entries) {
+    // Группируем по месяцам
+    const monthlyData = {};
+    
+    entries.forEach(entry => {
+        const date = new Date(entry.date);
+        const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+        monthlyData[monthYear] = (monthlyData[monthYear] || 0) + 1;
+    });
+    
+    // Сортируем по дате
+    const sortedMonths = Object.keys(monthlyData).sort();
+    const monthLabels = sortedMonths.map(m => {
+        const [year, month] = m.split('-');
+        return `${year}-${month}`;
+    });
+    
+    const monthCounts = sortedMonths.map(m => monthlyData[m]);
+    
+    const ctx = document.getElementById('monthlyChart').getContext('2d');
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: monthLabels,
+            datasets: [{
+                label: 'Entries per month',
+                data: monthCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Тепловая карта активности
+function createHeatmap(entries) {
+    const heatmapContainer = document.getElementById('heatmap');
+    heatmapContainer.innerHTML = '';
+    
+    // Группируем по дням недели и неделям месяца
+    // Для простоты создаем статическую тепловую карту на 4 недели
+    const weeks = 4;
+    const daysInWeek = 7;
+    
+    // Создаем массив для хранения количества записей по дням
+    const dayData = [];
+    
+    // Заполняем данными (в реальном приложении здесь была бы логика распределения)
+    for (let week = 0; week < weeks; week++) {
+        for (let day = 0; day < daysInWeek; day++) {
+            // Для демонстрации случайные данные
+            const count = Math.floor(Math.random() * 5);
+            dayData.push({ week, day, count });
+        }
+    }
+    
+    // Определяем цвет по количеству записей
+    function getColor(count) {
+        if (count === 0) return '#ebedf0';
+        if (count === 1) return '#9be9a8';
+        if (count === 2) return '#40c463';
+        if (count === 3) return '#30a14e';
+        return '#216e39';
+    }
+    
+    // Создаем ячейки тепловой карты
+    for (let week = 0; week < weeks; week++) {
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'heatmap-week';
+        
+        for (let day = 0; day < daysInWeek; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'heatmap-day';
+            dayDiv.title = `${count} entries`;
+            dayDiv.style.backgroundColor = getColor(dayData[week * daysInWeek + day].count);
+            weekDiv.appendChild(dayDiv);
+        }
+        
+        heatmapContainer.appendChild(weekDiv);
+    }
+}
 // RENDER HEATMAP
 function renderHeatmap(heatmapData) {
     const heatmapEl = document.getElementById('heatmap');
@@ -628,7 +788,7 @@ function logout() {
     localStorage.removeItem('currentUserId');
     localStorage.removeItem('theme');
     alert('You have been logged out');
-    window.location.href = 'login.html';
+    window.location.href = 'log_in.html';
 }
 
 function toggleTheme() {

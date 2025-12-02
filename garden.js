@@ -1,7 +1,3 @@
-
-/* -------------------
-   EMOTIONS
-------------------- */
 const emotionList = [
     "happiness", "joy", "calmness", "peace", "love", "affection", "tenderness",
     "hope", "gratitude", "inspiration", "admiration", "amusement", "excitement",
@@ -33,35 +29,34 @@ const flowerImages = {
     pride: "flowerimages/14.png",
     interest: "flowerimages/15.png",
     satisfaction: "flowerimages/16.png",
-    relief: "flowerimages/17.png",
+    relief: "flowerimages/1.png",
 
-    sadness: "flowerimages/18.png",
-    anger: "flowerimages/19.png",
-    frustration: "flowerimages/20.png",
-    anxiety: "flowerimages/21.png",
-    fear: "flowerimages/22.png",
-    guilt: "flowerimages/23.png",
-    shame: "flowerimages/24.png",
-    disappointment: "flowerimages/25.png",
-    loneliness: "flowerimages/26.png",
-    confusion: "flowerimages/27.png",
+    sadness: "flowerimages/2.png",
+    anger: "flowerimages/3.png",
+    frustration: "flowerimages/4.png",
+    anxiety: "flowerimages/5.png",
+    fear: "flowerimages/5.png",
+    guilt: "flowerimages/6.png",
+    shame: "flowerimages/7.png",
+    disappointment: "flowerimages/8.png",
+    loneliness: "flowerimages/9.png",
+    confusion: "flowerimages/10.png",
 
-    acceptance: "flowerimages/28.png",
-    nostalgia: "flowerimages/29.png",
-    surprise: "flowerimages/30.png",
-    curiosity: "flowerimages/31.png",
-    vulnerability: "flowerimages/32.png",
-    determination: "flowerimages/33.png",
-    empowerment: "flowerimages/34.png",
-    longing: "flowerimages/35.png",
-    overwhelm: "flowerimages/36.png",
-    emptiness: "flowerimages/37.png",
-    uncertainty: "flowerimages/38.png",
-    anticipation: "flowerimages/39.png",
-    trust: "flowerimages/40.png",
-    compassion: "flowerimages/41.png"
+    acceptance: "flowerimages/11.png",
+    nostalgia: "flowerimages/12.png",
+    surprise: "flowerimages/13.png",
+    curiosity: "flowerimages/14.png",
+    vulnerability: "flowerimages/15.png",
+    determination: "flowerimages/16.png",
+    empowerment: "flowerimages/1.png",
+    longing: "flowerimages/2.png",
+    overwhelm: "flowerimages/3.png",
+    emptiness: "flowerimages/4.png",
+    uncertainty: "flowerimages/5.png",
+    anticipation: "flowerimages/6.png",
+    trust: "flowerimages/7.png",
+    compassion: "flowerimages/8.png"
 };
-
 /* -------------------
    FIXED POSITIONS
 ------------------- */
@@ -819,7 +814,7 @@ function logout() {
     localStorage.removeItem("theme");
     localStorage.removeItem("gardenEntries");
     alert("You have been logged out");
-    window.location.href = "login_html";
+    window.location.href = "log_in.html";
 }
 
 /* -------------------
@@ -855,6 +850,3 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("App initialized successfully");
 });
-
-
-
